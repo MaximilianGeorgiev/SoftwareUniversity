@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Hospital", "04.Hospital\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Axe", "05.Axe\05.Axe.csproj", "{1F5E27F3-EB36-42AD-BE41-B700C3709A48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.Numbers", "06.Numbers\06.Numbers.csproj", "{88962A89-AD00-471F-9441-CDB1D1E2B1B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IZPIT_2_LADYBUGS", "06.Numbers\IZPIT_2_LADYBUGS.csproj", "{88962A89-AD00-471F-9441-CDB1D1E2B1B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

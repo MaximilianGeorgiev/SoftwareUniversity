@@ -1,52 +1,126 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-class Numbers
+class LadyBugs
 {
     static void Main(string[] args)
     {
-        int number = int.Parse(Console.ReadLine());
+        int fieldsize = int.Parse(Console.ReadLine());
+        int[] ladybugs = new int[fieldsize];
+        int[] indexes = Console.ReadLine()
+            .Split()
+            .Select(int.Parse)
+            .ToArray();
 
-        int firstDigit = int.Parse(number.ToString()[0].ToString());
-        int secondDigit = int.Parse(number.ToString()[1].ToString());
-        int lastDigit = int.Parse(number.ToString()[2].ToString());
-        string answer = null;
-        int count = 0;
-        int printed = 0;
-
-        int rows = firstDigit + secondDigit;
-        int columns = firstDigit + lastDigit;
-
-        while (count < rows * columns)
+        foreach (var index in indexes)
         {
-            if (number % 5 == 0)
+            if (index >= 0 || index < ladybugs.Length)
             {
-                number -= firstDigit;
-                answer += number + " ";
-                count++;
+                ladybugs[index] = 1;
             }
-            else if (number % 3 == 0)
-            {
-                number -= secondDigit;
-                answer += number + " ";
-                count++;
-            }
-            else if (number % 5 != 0 && number % 3 != 0)
-            {
-                number += lastDigit;
-                answer += number + " ";
-                count++;
-            }
-        }
-        string[] split = answer.Split(' ');
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
 
-                Console.Write(split[printed] + " ");
-                printed++;
-            }
-            Console.WriteLine();
         }
+
+        string command = Console.ReadLine();
+
+        while (command != "end")
+        {
+            string[] split = command.Split();
+            int position = int.Parse(split[0]);
+            string direction = split[1];
+            int flyLength = int.Parse(split[2]);
+
+            int currentIndex = 0;
+
+            bool hasBeenCompleted = false;
+
+
+            if (direction == "left")
+            {
+                currentIndex = position - flyLength;
+
+                while (!hasBeenCompleted)
+                {
+                    if (currentIndex < 0 || currentIndex >= ladybugs.Length)
+                    {
+                        ladybugs[position] = 0;
+                        hasBeenCompleted = true;
+                        continue;
+                    }
+
+                    else
+                    {
+                        ladybugs[position] = 0;
+
+                        if (ladybugs[currentIndex] == 1)
+                        {
+                            currentIndex -= flyLength;
+                        }
+
+                        if (currentIndex < 0 || currentIndex >= ladybugs.Length)
+                        {
+                            hasBeenCompleted = true;
+                            continue;
+                        }
+
+                        ladybugs[currentIndex] = 1;
+                        hasBeenCompleted = true;
+
+
+                    }
+                }
+            }
+
+            else if (direction == "right")
+            {
+                currentIndex = position + flyLength;
+                ladybugs[position] = 0;
+
+                while (!hasBeenCompleted)
+                {
+                    if (currentIndex >= 0 && currentIndex < ladybugs.Length)
+                    {
+                        if (ladybugs[currentIndex] == 1)
+                        {
+                            currentIndex += flyLength;
+                            continue;
+                        }
+
+                        if (currentIndex >= 0 && currentIndex < ladybugs.Length)
+                        {
+                            ladybugs[currentIndex] = 1;
+                            hasBeenCompleted = true;
+                            continue;
+                        }
+                        else
+                        {
+                            hasBeenCompleted = true;
+
+                        }
+
+                    }
+                    else
+                    {
+                        hasBeenCompleted = true;
+
+                    }
+
+                
+
+
+                command = Console.ReadLine();
+            } }
+        }
+        foreach (var bug in ladybugs)
+        {
+            Console.Write("{0} ", bug);
+        }
+
     }
+
+
+
 }
+
